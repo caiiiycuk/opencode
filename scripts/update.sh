@@ -3,6 +3,7 @@
 set -euo pipefail
 
 OPENCODE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # --- dcp + ponytail (npm plugins managed by opencode) ---
 # Bare `plugin update` skips a plugin whose cached copy fails to load (it can't
@@ -38,6 +39,23 @@ cargo uninstall rtk >/dev/null 2>&1 || true
 curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
 export PATH="$HOME/.local/bin:$PATH"
 rtk init -g --opencode --auto-patch
+
+# --- skills: one symlink per skills/<id> into the global skills dir ---
+mkdir -p "$OPENCODE_CONFIG/skills"
+for d in "$REPO"/skills/*/; do
+  [ -d "$d" ] || continue
+  ln -sfn "${d%/}" "$OPENCODE_CONFIG/skills/$(basename "$d")"
+done
+
+# --- AGENTS.md: marker block, replaced on every run (same style as codegraph's block) ---
+AGENTS="$OPENCODE_CONFIG/AGENTS.md"
+touch "$AGENTS"
+sed -i '/<!-- OPENSPEC_RU_START -->/,/<!-- OPENSPEC_RU_END -->/d' "$AGENTS"
+cat >> "$AGENTS" <<'EOF'
+<!-- OPENSPEC_RU_START -->
+Если в проекте есть каталог `openspec/`, перед любой работой с OpenSpec загрузи skill `openspec-ru`.
+<!-- OPENSPEC_RU_END -->
+EOF
 
 echo "done: $(opencode plugin list 2>/dev/null || true)"
 echo "codegraph $(codegraph --version), rtk $(rtk --version)"
