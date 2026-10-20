@@ -50,11 +50,13 @@ done
 # --- AGENTS.md: marker block, replaced on every run (same style as codegraph's block) ---
 AGENTS="$OPENCODE_CONFIG/AGENTS.md"
 touch "$AGENTS"
-sed -i '/<!-- OPENSPEC_RU_START -->/,/<!-- OPENSPEC_RU_END -->/d' "$AGENTS"
+sed -i '/<!-- CAIIIYCUK_START -->/,/<!-- CAIIIYCUK_END -->/d' "$AGENTS"
 cat >> "$AGENTS" <<'EOF'
-<!-- OPENSPEC_RU_START -->
-Если в проекте есть каталог `openspec/`, перед любой работой с OpenSpec загрузи skill `openspec-ru`.
-<!-- OPENSPEC_RU_END -->
+<!-- CAIIIYCUK_START -->
+- Talk to the user in Russian: replies, plans, explanations, OpenSpec artifacts.
+- Code, code comments, commit messages, PR titles and descriptions: English only.
+- If the project has an `openspec/` directory, load the `openspec-ru` skill before any OpenSpec work.
+<!-- CAIIIYCUK_END -->
 EOF
 
 echo "done: $(opencode plugin list 2>/dev/null || true)"
