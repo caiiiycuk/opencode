@@ -16,7 +16,7 @@ git clone git@github.com:caiiiycuk/opencode.git ~/.opencode/config/opencode-caii
 - ставит или обновляет плагины `@tarquinen/opencode-dcp`, `@dietrichgebert/ponytail` и пишет `~/.config/opencode/dcp.jsonc`;
 - ставит или обновляет `codegraph` и `rtk`;
 - создаёт `~/.config/opencode/skills/` и делает симлинк на каждый `skills/<id>` из этого репо;
-- дописывает блок между `<!-- CAIIIYCUK_START -->` и `<!-- CAIIIYCUK_END -->` в `~/.config/opencode/AGENTS.md` (повторный запуск заменяет блок, а не дублирует): правила языка (общение на русском; код, комментарии, коммиты и PR на английском) и подключение `openspec-ru`.
+- дописывает содержимое `AGENTS.md` из этого репо блоком между `<!-- CAIIIYCUK_START -->` и `<!-- CAIIIYCUK_END -->` в `~/.config/opencode/AGENTS.md` (повторный запуск заменяет блок, а не дублирует). Правки инструкций делаются в `AGENTS.md` репо, затем запускается скрипт.
 
 ## Skills
 

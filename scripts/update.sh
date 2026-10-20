@@ -48,16 +48,15 @@ for d in "$REPO"/skills/*/; do
 done
 
 # --- AGENTS.md: marker block, replaced on every run (same style as codegraph's block) ---
+# Block body lives in $REPO/AGENTS.md so it can be edited without touching this script.
 AGENTS="$OPENCODE_CONFIG/AGENTS.md"
 touch "$AGENTS"
 sed -i '/<!-- CAIIIYCUK_START -->/,/<!-- CAIIIYCUK_END -->/d' "$AGENTS"
-cat >> "$AGENTS" <<'EOF'
-<!-- CAIIIYCUK_START -->
-- Talk to the user in Russian: replies, plans, explanations, OpenSpec artifacts.
-- Code, code comments, commit messages, PR titles and descriptions: English only.
-- If the project has an `openspec/` directory, load the `openspec-ru` skill before any OpenSpec work.
-<!-- CAIIIYCUK_END -->
-EOF
+{
+  echo '<!-- CAIIIYCUK_START -->'
+  cat "$REPO/AGENTS.md"
+  echo '<!-- CAIIIYCUK_END -->'
+} >> "$AGENTS"
 
 echo "done: $(opencode plugin list 2>/dev/null || true)"
 echo "codegraph $(codegraph --version), rtk $(rtk --version)"
