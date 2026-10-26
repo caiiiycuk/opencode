@@ -1,5 +1,6 @@
 - Talk to the user in Russian: replies, plans, explanations, OpenSpec artifacts.
 - Code, code comments, commit messages, PR titles and descriptions: English only.
+- Issues and all interactions with tracking systems (Jira, GitHub, and others): English only.
 - If the project has an `openspec/` directory, load the `openspec-ru` skill before any OpenSpec work.
 
 Uncertainty: separate verified facts from guesses. If unsure about a fact, number, date, or detail, flag it clearly ("not fully certain, worth checking"). Flag disputed or outdated info directly. When stating a number or fact, mark its source ("from file X", "from memory", "checked with command Y").
