@@ -6,11 +6,16 @@ OPENCODE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # --- dcp + ponytail (npm plugins managed by opencode) ---
-# Bare `plugin update` skips a plugin whose cached copy fails to load (it can't
-# "check" it), so each one is updated by name — that path always reinstalls.
 for p in @tarquinen/opencode-dcp@latest @dietrichgebert/ponytail@latest; do
   opencode plugin add "$p"
-  opencode plugin update "$p"
+  # SAFETY: The shared server may not have reloaded the config written by add yet.
+  for attempt in 1 2 3 4 5; do
+    if opencode plugin update "$p"; then
+      break
+    fi
+    [ "$attempt" -lt 5 ] || exit 1
+    sleep 1
+  done
 done
 
 cat > "$OPENCODE_CONFIG/dcp.jsonc" <<'EOF'
