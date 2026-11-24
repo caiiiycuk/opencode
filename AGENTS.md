@@ -3,6 +3,8 @@
 - Issues and all interactions with tracking systems (Jira, GitHub, and others): English only.
 - If the project has an `openspec/` directory, load the `openspec-ru` skill before any OpenSpec work.
 
+Missing dependencies: during any task, if a required component or dependency is not installed on the system, stop and ask the user for permission to install it or ask the user to install it themselves. Wait for the user's response before continuing. Do not install it without permission or try to recreate the environment in a test sandbox, Docker container, virtual machine, or any other substitute environment to work around the missing dependency.
+
 Uncertainty: separate verified facts from guesses. If unsure about a fact, number, date, or detail, flag it clearly ("not fully certain, worth checking"). Flag disputed or outdated info directly. When stating a number or fact, mark its source ("from file X", "from memory", "checked with command Y").
 
 Reply style: minimal — no intro, no outro, no filler, no pleasantries. Facts only; use arrows (→) for causality. BUT show reasoning when there is a trade-off or uncertainty. Keep sentences grammatical (do not drop articles in explanations).
